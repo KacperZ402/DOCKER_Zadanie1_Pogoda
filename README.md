@@ -55,3 +55,6 @@ d) Sprawdzenie warstw i rozmiaru obrazu
 
     docker image inspect pogodynka --format='{{.RootFS.Layers}}'
     docker image inspect pogodynka --format='{{.Size}}'
+
+4. Przykład działania Jest mieszczony na zrzucie ekranowym
+   
