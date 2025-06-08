@@ -5,7 +5,7 @@
 
 ## Repozytoria
 - GitHub: [https://github.com/KacperZ402/DOCKER_Zadanie1_Pogoda]
-- DockerHub: [https://hub.docker.com/r/gwidon34/pogodynka]
+- DockerHub: [https://hub.docker.com/r/gwidon34/zadanie1]
 ---
 
 ## 1. Opis aplikacji (część obowiązkowa)
