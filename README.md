@@ -63,38 +63,33 @@ d) Sprawdzenie warstw i rozmiaru obrazu
 Użyte narzędzia i konfiguracja
 🛠 Builder typu docker-container
 Builder został utworzony i aktywowany:
-
-bash
-Kopiuj
-Edytuj
-docker buildx create --name multi-builder --driver docker-container --use
-docker buildx inspect --bootstrap
+    docker buildx create --name multi-builder --driver docker-container --use
+    docker buildx inspect --bootstrap
 Dzięki temu możliwe było użycie wieloarchitektonicznego builda i efektywnego cache’owania.
 
 ### Budowa i publikacja obrazu z cache
 Obraz został zbudowany i wypchnięty do Docker Hub w wersji wspierającej dwie architektury:
 
-bash
-Kopiuj
-Edytuj
-docker buildx build \
-  --platform linux/amd64,linux/arm64 \
-  --tag gwidon34/zadanie1:latest \
-  --push \
-  --build-arg BUILDKIT_INLINE_CACHE=1 \
-  --cache-from=type=registry,ref=gwidon34/zadanie1:buildcache \
-  --cache-to=type=registry,ref=gwidon34/zadanie1:buildcache,mode=max \
-  .
+
+    docker buildx build \
+    --platform linux/amd64,linux/arm64 \
+    --tag gwidon34/zadanie1:latest \
+    --push \
+    --build-arg BUILDKIT_INLINE_CACHE=1 \
+    --cache-from=type=registry,ref=gwidon34/zadanie1:buildcache \
+    --cache-to=type=registry,ref=gwidon34/zadanie1:buildcache,mode=max \
+    .
+
+    docker buildx build --platform linux/amd64,linux/arm64 --tag gwidon34/zadanie1:latest --push --build-arg BUILDKIT_INLINE_CACHE=1 --cache-from=type=registry,ref=gwidon34/zadanie1:buildcache --cache-to=type=registry,ref=gwidon34/zadanie1:buildcache,mode=max .
+
 ✅ Obraz został wypchnięty do:
 🔗 Docker Hub: https://hub.docker.com/r/gwidon34/zadanie1
 
 📦 Sprawdzenie platform i manifestu
 ### Weryfikacja, że obraz wspiera amd64 i arm64:
 
-bash
-Kopiuj
-Edytuj
-docker buildx imagetools inspect gwidon34/zadanie1:latest
+
+    docker buildx imagetools inspect gwidon34/zadanie1:latest
 ✅ Manifest zawiera:
 
 linux/amd64
@@ -109,29 +104,16 @@ Zastosowano cache push/pull do rejestru (--cache-to, --cache-from)
 Kolejna budowa była znacząco szybsza, co potwierdza efektywne wykorzystanie cache'a
 
 ### Uruchomienie kontenera
-bash
-Kopiuj
-Edytuj
-docker run -p 5000:5000 gwidon34/zadanie1:latest
+    docker run -p 5000:5000 gwidon34/zadanie1:latest
 ### Sprawdzenie logów uruchomieniowych
-bash
-Kopiuj
-Edytuj
-docker logs <container_id>
+    docker logs <container_id>
 Przykładowy log:
-
-yaml
-Kopiuj
-Edytuj
-Aplikacja uruchomiona: 2025-04-23 21:16:29
-Autor: Kacper Zuk
-Nasłuch na porcie: 5000
+    Aplikacja uruchomiona: 2025-04-23 21:16:29
+    Autor: Kacper Zuk
+    Nasłuch na porcie: 5000
 ### Sprawdzenie warstw i rozmiaru obrazu
-bash
-Kopiuj
-Edytuj
-docker image inspect gwidon34/zadanie1:latest --format='{{.RootFS.Layers}}'
-docker image inspect gwidon34/zadanie1:latest --format='{{.Size}}'
+    docker image inspect gwidon34/zadanie1:latest --format='{{.RootFS.Layers}}'
+    docker image inspect gwidon34/zadanie1:latest --format='{{.Size}}'
 
 
    
