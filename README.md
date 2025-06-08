@@ -63,8 +63,10 @@ d) Sprawdzenie warstw i rozmiaru obrazu
 Użyte narzędzia i konfiguracja
 🛠 Builder typu docker-container
 Builder został utworzony i aktywowany:
+
     docker buildx create --name multi-builder --driver docker-container --use
     docker buildx inspect --bootstrap
+
 Dzięki temu możliwe było użycie wieloarchitektonicznego builda i efektywnego cache’owania.
 
 ### Budowa i publikacja obrazu z cache
