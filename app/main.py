@@ -69,10 +69,14 @@ def index():
         city=city
     )
 
-# Info o uruchomieniu
-if __name__ == "__main__":
+def log_start_info():
     import datetime
     print(f"Aplikacja uruchomiona: {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
     print("Autor: Kacper Zuk")
     print("Nasłuch na porcie: 5000")
+
+if __name__ == "__main__":
+    log_start_info()
     app.run(host="0.0.0.0", port=5000)
+else:
+    log_start_info()
